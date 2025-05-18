@@ -9,7 +9,7 @@ using namespace std;
 #define Q32 0x9E3779B9
 #define R 12
 #define W 32
-const int KeyBytes = 16; // заміна #define B 16
+const int KeyBytes = 16;
 
 unsigned int ROL(unsigned int x, unsigned int n) {
     return (x << (n & 31)) | (x >> (32 - (n & 31)));
@@ -66,7 +66,6 @@ void RC5_Decrypt(unsigned int* C, unsigned int* M, unsigned int* S) {
 
 string Task1(unsigned int* source, unsigned int sourceSize, unsigned int* key, bool encryptionMode) {
     stringstream functionOutput;
-
     unsigned int S[2 * (R + 1)];
     RC5_Key_Shedule(key, S);
 
@@ -83,5 +82,9 @@ string Task1(unsigned int* source, unsigned int sourceSize, unsigned int* key, b
         }
     }
 
-    return functionOutput.str();
+    string result = functionOutput.str();
+    if (!result.empty() && result.back() == ' ')
+        result.pop_back();
+
+    return result;
 }
