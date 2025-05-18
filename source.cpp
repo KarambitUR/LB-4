@@ -8,8 +8,8 @@ using namespace std;
 #define P32 0xB7E15163
 #define Q32 0x9E3779B9
 #define R 12
-#define B 16
 #define W 32
+const int KeyBytes = 16; // заміна #define B 16
 
 unsigned int ROL(unsigned int x, unsigned int n) {
     return (x << (n & 31)) | (x >> (32 - (n & 31)));
@@ -20,7 +20,7 @@ unsigned int ROR(unsigned int x, unsigned int n) {
 }
 
 void RC5_Key_Shedule(unsigned int* K, unsigned int* S) {
-    int c = B / 4;
+    int c = KeyBytes / 4;
     int t = 2 * (R + 1);
     unsigned int L[4] = {0};
 
